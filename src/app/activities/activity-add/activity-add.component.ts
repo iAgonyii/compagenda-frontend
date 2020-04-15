@@ -23,7 +23,7 @@ export class ActivityAddComponent implements OnInit {
   }
 
   addActivity(): void {
-    this.activity.userId = +localStorage.getItem('userId');
+    this.activity.userId = +localStorage.getItem('UserId');
     console.log(this.activity);
     this.activityService.addActivity(this.activity);
     this.activity.category = null;

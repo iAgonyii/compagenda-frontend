@@ -15,7 +15,11 @@ export class ActivityService {
   }
 
   addActivity(activity: Activity): void {
-    this.httpClient.post<Activity>(this.activitiesUrl, activity).subscribe();
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+    };
+
+    this.httpClient.post<Activity>(this.activitiesUrl, activity, options).subscribe();
   }
 
   editActivity(activity: Activity): void {
@@ -23,7 +27,10 @@ export class ActivityService {
   }
 
   getActivities(userId: number): Observable<Activity[]> {
-    const url = this.activitiesUrl + '?userId=' + localStorage.getItem('userId');
-    return this.httpClient.get<Activity[]>(url);
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+    };
+    const url = this.activitiesUrl + '?userId=' + userId;
+    return this.httpClient.get<Activity[]>(url, options);
   }
 }

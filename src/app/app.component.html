@@ -1,12 +1,28 @@
 <h1> Home Page </h1>
 <!--<navigation></navigation>-->
-<div *ngIf="!loggedIn">
-  Login as user: <input type="number" min="1" class="small" [(ngModel)]="userId"> &nbsp;
-  <button class="btn btn-primary btn-sm" type="button" (click)="login(userId)">Login</button>
-</div>
 <div *ngIf="loggedIn">
-  Logged in as: {{userId}}
-  <button class="btn btn-primary btn-sm" type="button" (click)="logout()">Logout</button>
+  <p>Logged in</p>
+  <button *ngIf="loggedIn" (click)="logout()">Logout</button>
 </div>
 
+
+<div *ngIf="!loggedIn">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <div>
+      <label for="username">
+        Username
+      </label>
+      <input id="username" type="text" formControlName="username">
+    </div>
+
+    <div>
+      <label for="password">
+        Password
+      </label>
+      <input id="password" type="password" formControlName="password">
+    </div>
+
+    <button class="button" type="submit">Login</button>
+  </form>
+</div>
 <div style="text-align: center;"><router-outlet></router-outlet></div>

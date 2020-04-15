@@ -7,7 +7,7 @@ import { ActivityAddComponent } from './activities/activity-add/activity-add.com
 import { ActivityListComponent } from './activities/activity-list/activity-list.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { ActivitiesComponent } from './activities/activities.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivityService} from './services/activity.service';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -21,13 +21,14 @@ import {AuthGuard} from './services/authGuard';
     AgendaComponent,
     ActivitiesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    NgbModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        NgbModule,
+        ReactiveFormsModule
+    ],
   providers: [
     ActivityService,
     AuthGuard
