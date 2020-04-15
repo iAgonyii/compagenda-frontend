@@ -13,33 +13,7 @@ import {AuthGuard} from './services/authGuard';
 export class AppComponent implements OnInit {
   title = 'compagendafront';
 
-  loggedIn: boolean;
-
-  loginForm;
-
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private authGuard: AuthGuard) {
-    this.loginForm = this.formBuilder.group({
-      username: '',
-      password: ''
-    });
-  }
-
   ngOnInit(): void {
-    this.loggedIn = this.authGuard.isLoggedIn();
-    console.log(localStorage.getItem('UserId'));
-    console.log(localStorage.getItem('Token'));
-    console.log(this.loggedIn);
   }
-
-  onSubmit(loginData) {
-    console.log(loginData);
-    this.authService.login(loginData.username, loginData.password);
-  }
-
-  logout() {
-    localStorage.clear();
-    window.location.reload();
-  }
-
 
 }

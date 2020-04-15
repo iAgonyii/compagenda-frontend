@@ -12,6 +12,8 @@ import {ActivityService} from './services/activity.service';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthGuard} from './services/authGuard';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {AuthGuard} from './services/authGuard';
     ActivityAddComponent,
     ActivityListComponent,
     AgendaComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    RegisterComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,

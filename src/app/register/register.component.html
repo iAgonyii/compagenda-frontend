@@ -1,0 +1,32 @@
+<h2>Register</h2>
+
+
+<div *ngIf="loggedIn">
+  <p>Already logged in</p>
+  <button *ngIf="loggedIn" (click)="logout()">Logout</button>
+</div>
+
+<form *ngIf="!loggedIn" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+  <div>
+    <label for="username">
+      Username
+    </label> <br>
+    <input id="username" type="text" formControlName="username">
+  </div> <br>
+
+  <div>
+    <label for="email">
+      Email
+    </label><br>
+    <input id="email" type="text" formControlName="email">
+  </div> <br>
+
+  <div>
+    <label for="password">
+      Password
+    </label> <br>
+    <input id="password" type="password" formControlName="password">
+  </div> <br>
+
+  <button class="button" type="submit">Register</button>
+</form>

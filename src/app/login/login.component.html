@@ -1,0 +1,27 @@
+<h2>Login</h2>
+
+<div *ngIf="loggedIn">
+  <p>Already logged in</p>
+  <button *ngIf="loggedIn" (click)="logout()">Logout</button>
+</div>
+
+
+<div *ngIf="!loggedIn">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <div>
+      <label for="username">
+        Username
+      </label> <br>
+      <input id="username" type="text" formControlName="username">
+    </div> <br>
+
+    <div>
+      <label for="password">
+        Password
+      </label> <br>
+      <input id="password" type="password" formControlName="password">
+    </div> <br>
+
+    <button class="button" type="submit">Login</button>
+  </form>
+</div>
