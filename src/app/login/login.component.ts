@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(loginData.username, loginData.password);
   }
 
-  logout()// {
+  logout() {
     localStorage.clear();
     window.location.reload();
   }
