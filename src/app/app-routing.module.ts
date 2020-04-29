@@ -5,11 +5,12 @@ import {ActivityAddComponent} from './activities/activity-add/activity-add.compo
 import {ActivityListComponent} from './activities/activity-list/activity-list.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './services/authGuard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'  },
-  { path: 'home', component: AgendaComponent, children: [
+  { path: 'home', component: AgendaComponent, canActivate: [AuthGuard], children: [
       { path: 'list', component: ActivityListComponent }
     ]
   },

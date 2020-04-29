@@ -12,8 +12,14 @@ import {AuthGuard} from './services/authGuard';
 })
 export class AppComponent implements OnInit {
   title = 'compagendafront';
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+
   }
+
+
 
 }
