@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import 'url-search-params-polyfill';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -16,6 +16,9 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {
     this.authUrl = 'http://localhost:8080/compagenda/api/auth';
   }
+
+  @Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
+  @Output() getUsername: EventEmitter<any> = new EventEmitter();
 
   login(username: string, password: string) {
     const body = new URLSearchParams();
@@ -39,6 +42,8 @@ export class AuthService {
         const decodedToken = helper.decodeToken(token);
         localStorage.setItem('UserId',  decodedToken.sub);
 
+        this.getLoggedIn.emit(true);
+        this.getUsername.emit(username);
         this.router.navigate(['/home']);
         console.log('Succesfully logged in and authorized');
         return true;

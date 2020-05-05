@@ -12,12 +12,22 @@ import {AuthGuard} from './services/authGuard';
 })
 export class AppComponent implements OnInit {
   title = 'compagendafront';
-  constructor() {
+  loggedIn: boolean;
+  username: string;
 
+  constructor(private authService: AuthService, private authGuard: AuthGuard) {
+    authService.getLoggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
+    authService.getUsername.subscribe(username => this.username = username);
   }
 
   ngOnInit(): void {
+    this.loggedIn = this.authGuard.isLoggedIn();
+  }
 
+  logout() {
+    this.loggedIn = false;
+    localStorage.clear();
+    window.location.reload();
   }
 
 
