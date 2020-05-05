@@ -6,27 +6,36 @@
   <button *ngIf="loggedIn" (click)="logout()">Logout</button>
 </div>
 
-<form *ngIf="!loggedIn" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
-  <div>
-    <label for="username">
-      Username
-    </label> <br>
-    <input id="username" type="text" formControlName="username">
-  </div> <br>
+<div *ngIf="!loggedIn">
+  <div class="row justify-content-center">
+    <div class="col-md-2">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)"><br>
+        <h4 class="h4 mb-3 font-weight-normal">Please register here</h4>
+        <div class="form-group">
+          <label style="float: left" for="username">
+            Username
+          </label> <br>
+          <input class="form-control" id="username" type="text" formControlName="username" placeholder="Username" required autofocus>
+        </div>
 
-  <div>
-    <label for="email">
-      Email
-    </label><br>
-    <input id="email" type="text" formControlName="email">
-  </div> <br>
+        <div class="form-group">
+          <label style="float: left" for="email">
+            Email
+          </label> <br>
+          <input class="form-control" id="email" type="email" formControlName="email" placeholder="Email" required autofocus>
+        </div>
 
-  <div>
-    <label for="password">
-      Password
-    </label> <br>
-    <input id="password" type="password" formControlName="password">
-  </div> <br>
+        <div class="form-group">
+          <label style="float: left"  for="password">
+            Password
+          </label> <br>
+          <input class="form-control" id="password" type="password" formControlName="password" placeholder="Password" required>
+        </div> <br>
 
-  <button class="button" type="submit">Register</button>
-</form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <br> <br>
+
+      </form>
+    </div><br>
+  </div>
+</div>
