@@ -6,14 +6,13 @@ import {ActivityListComponent} from './activities/activity-list/activity-list.co
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './services/authGuard';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'  },
-  { path: 'home', component: AgendaComponent, canActivate: [AuthGuard], children: [
-      { path: 'list', component: ActivityListComponent }
-    ]
-  },
+  { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'agenda', component: AgendaComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent }
 ];

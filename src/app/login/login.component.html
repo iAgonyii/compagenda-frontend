@@ -24,6 +24,7 @@
 
     <button class="button" type="submit">Login</button>
     <br> <br>
-    <a [routerLink]="['/register']">No account? Click here to register</a>
+    <a [routerLink]="['/register']">No account? Click here to register</a><br>
+    <span *ngIf="loginError" class="text-danger">Login failed - Incorrect credentials</span>
   </form>
 </div>

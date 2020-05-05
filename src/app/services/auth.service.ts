@@ -19,6 +19,7 @@ export class AuthService {
 
   @Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
   @Output() getUsername: EventEmitter<any> = new EventEmitter();
+  @Output() loginError: EventEmitter<any> = new EventEmitter();
 
   login(username: string, password: string) {
     const body = new URLSearchParams();
@@ -32,7 +33,7 @@ export class AuthService {
 
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
-    return this.httpClient.post(this.authUrl + '/login', body.toString(), options).subscribe(
+    this.httpClient.post(this.authUrl + '/login', body.toString(), options).subscribe(
       (response: HttpResponse<200>) => {
 
         // Set tokens and local variables
@@ -41,16 +42,16 @@ export class AuthService {
         const helper = new JwtHelperService();
         const decodedToken = helper.decodeToken(token);
         localStorage.setItem('UserId',  decodedToken.sub);
+        localStorage.setItem('Username', username);
 
         this.getLoggedIn.emit(true);
         this.getUsername.emit(username);
         this.router.navigate(['/home']);
         console.log('Succesfully logged in and authorized');
-        return true;
       },
       (response: HttpResponse<401>) => {
         console.log('401 - Incorrect credentials');
-        return false;
+        this.loginError.emit(true);
       });
   }
 

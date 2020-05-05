@@ -11,7 +11,7 @@ import {AuthGuard} from '../services/authGuard';
 export class LoginComponent implements OnInit {
 
   loggedIn: boolean;
-
+  loginError: boolean;
   loginForm;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private authGuard: AuthGuard) {
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
       username: '',
       password: ''
     });
+    authService.loginError.subscribe(loginError => this.loginError = loginError);
   }
 
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(loginData) {
-    this.authService.login(loginData.username, loginData.password);
+    console.log(this.authService.login(loginData.username, loginData.password));
   }
 
   logout() {

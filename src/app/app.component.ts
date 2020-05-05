@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedIn = this.authGuard.isLoggedIn();
+    this.username = localStorage.getItem('Username');
   }
 
   logout() {
