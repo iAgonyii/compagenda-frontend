@@ -14,7 +14,7 @@ export class AuthService {
   private authUrl: string;
 
   constructor(private httpClient: HttpClient, private router: Router) {
-    this.authUrl = 'http://localhost:8080/compagenda/api/auth';
+    this.authUrl = 'http://localhost:8080/';
   }
 
   @Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
@@ -22,27 +22,27 @@ export class AuthService {
   @Output() loginError: EventEmitter<any> = new EventEmitter();
 
   login(username: string, password: string) {
-    const body = new URLSearchParams();
-    body.set('username', username);
-    body.set('password', password);
+    // const body = new URLSearchParams();
+    // body.set('username', username);
+    // body.set('password', password);
 
     const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
       observe: 'response'
     };
 
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
-    this.httpClient.post(this.authUrl + '/login', body.toString(), options).subscribe(
+    this.httpClient.post<any>(this.authUrl + 'login', {username, password}, options).subscribe(
       (response: HttpResponse<200>) => {
 
         // Set tokens and local variables
-        const token = response.headers.get('Authorization')
+        const token = response.headers.get('Authorization');
         localStorage.setItem('Token', token);
         const helper = new JwtHelperService();
         const decodedToken = helper.decodeToken(token);
-        localStorage.setItem('UserId',  decodedToken.sub);
-        localStorage.setItem('Username', username);
+        // localStorage.setItem('UserId',  decodedToken.sub);
+        localStorage.setItem('Username', decodedToken.sub);
 
         this.getLoggedIn.emit(true);
         this.getUsername.emit(username);
@@ -50,7 +50,7 @@ export class AuthService {
         console.log('Succesfully logged in and authorized');
       },
       (response: HttpResponse<401>) => {
-        console.log('401 - Incorrect credentials');
+        console.log('403 - Incorrect credentials');
         this.loginError.emit(true);
       });
   }
@@ -67,7 +67,7 @@ export class AuthService {
     };
 
     // @ts-ignore
-    this.httpClient.post(this.authUrl + '/register', body.toString(), options).subscribe(
+    this.httpClient.post(this.authUrl + 'auth/register', body.toString(), options).subscribe(
       (response: HttpResponse<201>) => {
           console.log('201 - Succesfully registered user');
           this.router.navigate(['/login']);
