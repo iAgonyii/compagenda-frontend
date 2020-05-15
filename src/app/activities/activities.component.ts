@@ -22,4 +22,9 @@ export class ActivitiesComponent implements OnInit {
     this.activityService.editActivity(this.activity);
     this.activeModal.close();
   }
+
+  deleteActivity() {
+    this.activityService.deleteActivity(this.activity);
+    this.activeModal.close();
+  }
 }

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(loginData) {
-    console.log(this.authService.login(loginData.username, loginData.password));
+    this.authService.login(loginData.username, loginData.password);
   }
 
   logout() {

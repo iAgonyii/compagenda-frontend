@@ -5,6 +5,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {isNumeric} from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,11 @@ import {catchError} from 'rxjs/operators';
 export class AuthService {
 
   private authUrl: string;
+  private userUrl: string;
 
   constructor(private httpClient: HttpClient, private router: Router) {
     this.authUrl = 'http://localhost:8080/';
+    this.userUrl = 'http://localhost:8080/user';
   }
 
   @Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
@@ -43,12 +46,25 @@ export class AuthService {
         const decodedToken = helper.decodeToken(token);
         // localStorage.setItem('UserId',  decodedToken.sub);
         localStorage.setItem('Username', decodedToken.sub);
-
         this.getLoggedIn.emit(true);
         this.getUsername.emit(username);
+
+        const options2 = {
+          headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+        };
+
+        this.httpClient.get(this.userUrl + '/getId/' + decodedToken.sub, options2).subscribe(res => {
+          if (res != null && isNumeric(res)) {
+              localStorage.setItem('UserId', res.toString());
+              console.log(localStorage.getItem('UserId'));
+          }
+        });
+
+
         this.router.navigate(['/home']);
         console.log('Succesfully logged in and authorized');
       },
+
       (response: HttpResponse<401>) => {
         console.log('403 - Incorrect credentials');
         this.loginError.emit(true);

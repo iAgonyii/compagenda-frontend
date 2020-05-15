@@ -30,7 +30,7 @@ export class ActivityAddComponent implements OnInit {
     this.activity.starttime = null;
     this.activity.endtime = null;
     this.activeModal.close();
-    // window.location.reload();
+    window.location.reload();
   }
 
   isDisabled(): boolean {

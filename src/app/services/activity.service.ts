@@ -11,7 +11,7 @@ export class ActivityService {
   private activitiesUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.activitiesUrl = 'http://localhost:8080/compagenda/api/activity';
+    this.activitiesUrl = 'http://localhost:8080/activity';
   }
 
   addActivity(activity: Activity): void {
@@ -23,7 +23,11 @@ export class ActivityService {
   }
 
   editActivity(activity: Activity): void {
-    this.httpClient.post<Activity>(this.activitiesUrl + '/' + activity.id, activity).subscribe();
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+    };
+
+    this.httpClient.post<Activity>(this.activitiesUrl, activity, options).subscribe();
   }
 
   getActivities(userId: number): Observable<Activity[]> {
@@ -32,5 +36,23 @@ export class ActivityService {
     };
     const url = this.activitiesUrl + '?userId=' + userId;
     return this.httpClient.get<Activity[]>(url, options);
+  }
+
+  deleteActivity(activity: Activity): void {
+    console.log(activity);
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token')),
+      body: {
+        id: activity.id,
+        category: activity.category,
+        starttime: activity.starttime,
+        endtime: activity.endtime,
+        userId: activity.userId
+      }
+    };
+
+    this.httpClient.delete(this.activitiesUrl, options).subscribe( s => {
+      console.log(s);
+    });
   }
 }

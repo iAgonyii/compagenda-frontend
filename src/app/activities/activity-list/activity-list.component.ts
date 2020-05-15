@@ -17,7 +17,7 @@ export class ActivityListComponent implements OnInit {
   constructor(private activityService: ActivityService, private modalService: NgbModal, public authGuard: AuthGuard) { }
 
   ngOnInit(): void {
-    if(this.authGuard.isLoggedIn()) {
+    if (this.authGuard.isLoggedIn()) {
       this.activityService.getActivities(+localStorage.getItem('UserId')).subscribe(res => {
         console.log(res);
         this.activities = res;
