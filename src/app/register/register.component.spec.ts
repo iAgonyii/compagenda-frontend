@@ -19,7 +19,13 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
+
+  const sum = require('./sum');
+
+  test('1 + 2 equal 3', () => {
+    expect(sum(1, 2)).toBe(3);
   });
 });
