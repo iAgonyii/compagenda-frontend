@@ -26,5 +26,6 @@ export class ActivitiesComponent implements OnInit {
   deleteActivity() {
     this.activityService.deleteActivity(this.activity);
     this.activeModal.close();
+    window.location.reload();
   }
 }

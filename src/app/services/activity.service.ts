@@ -39,20 +39,9 @@ export class ActivityService {
   }
 
   deleteActivity(activity: Activity): void {
-    console.log(activity);
     const options = {
-      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token')),
-      body: {
-        id: activity.id,
-        category: activity.category,
-        starttime: activity.starttime,
-        endtime: activity.endtime,
-        userId: activity.userId
-      }
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
     };
-
-    this.httpClient.delete(this.activitiesUrl, options).subscribe( s => {
-      console.log(s);
-    });
+    this.httpClient.post<Activity>(this.activitiesUrl + '/delete', activity, options).subscribe();
   }
 }
