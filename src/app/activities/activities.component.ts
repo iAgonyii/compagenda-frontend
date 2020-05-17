@@ -10,7 +10,7 @@ import {ActivityService} from '../services/activity.service';
 })
 export class ActivitiesComponent implements OnInit {
 
-  activity: Activity;
+  activity: any = {};
 
   constructor(public activeModal: NgbActiveModal, private activityService: ActivityService) { }
 
