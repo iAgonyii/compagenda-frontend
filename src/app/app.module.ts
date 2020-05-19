@@ -15,6 +15,7 @@ import {AuthGuard} from './services/authGuard';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TeamCreateComponent } from './team/team-create/team-create.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ActivitiesComponent,
     RegisterComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    TeamCreateComponent
   ],
     imports: [
         BrowserModule,

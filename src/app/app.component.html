@@ -16,12 +16,25 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Team
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Team Agenda</a>
-          <a class="dropdown-item" href="#">Manage Team</a>
+        <div *ngIf="!this.team" class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="" (click)="openTeamCreateModal()">Create a team</a>
+          <a class="dropdown-item" routerLink="">Team invites</a>
+          <a class="dropdown-item disabled" routerLink="">Team agenda</a>
+          <a class="dropdown-item disabled" routerLink="">Manage team</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-danger" href="#">Leave Team</a>
+<!--          <a class="dropdown-item text-danger" href="#">Leave Team</a>-->
+<!--          <a class="dropdown-item text-danger" routerLink="" (click)="deleteTeam()">Delete team</a>-->
         </div>
+
+        <div *ngIf="this.team" class="dropdown-menu" aria-labelledby="navbarDropdown">
+<!--          <a class="dropdown-item" routerLink="" (click)="openTeamCreateModal()">Create a team</a>-->
+          <a class="dropdown-item" routerLink="">Team Agenda</a>
+          <a class="dropdown-item" routerLink="">Manage Team</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger" routerLink="">Leave Team</a>
+          <a class="dropdown-item text-danger" routerLink="" (click)="deleteTeam()">Delete team</a>
+        </div>
+
       </li>
     </ul>
     <ul style="float:right" class="navbar-nav mr-auto">

@@ -4,6 +4,11 @@ import {AuthService} from './services/auth.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {getHelper} from '@angular/core/schematics/migrations/renderer-to-renderer2/helpers';
 import {AuthGuard} from './services/authGuard';
+import {ActivityAddComponent} from './activities/activity-add/activity-add.component';
+import {TeamCreateComponent} from './team/team-create/team-create.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Team} from './models/team';
+import {TeamService} from './services/team.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +20,18 @@ export class AppComponent implements OnInit {
   loggedIn: boolean;
   username: string;
 
-  constructor(private authService: AuthService, private authGuard: AuthGuard) {
+  team: Team;
+
+  constructor(private authService: AuthService, private authGuard: AuthGuard, private modalService: NgbModal,
+              private teamService: TeamService) {
+
     authService.getLoggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
     authService.getUsername.subscribe(username => this.username = username);
+
+    teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
+      this.team = team;
+      console.log(this.team);
+    });
   }
 
   ngOnInit(): void {
@@ -29,6 +43,17 @@ export class AppComponent implements OnInit {
     this.loggedIn = false;
     localStorage.clear();
     window.location.reload();
+  }
+
+  openTeamCreateModal() {
+    const modalRef = this.modalService.open(TeamCreateComponent);
+  }
+
+  deleteTeam() {
+    if (confirm('Are you sure to delete your team: ' + this.team.name)) {
+      this.teamService.deleteTeam(this.team.id);
+      window.location.reload();
+    }
   }
 
 

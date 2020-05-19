@@ -42,6 +42,7 @@ export class ActivityService {
     const options = {
       headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
     };
+
     this.httpClient.post<Activity>(this.activitiesUrl + '/delete', activity, options).subscribe();
   }
 }
