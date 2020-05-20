@@ -38,6 +38,14 @@ export class ActivityService {
     return this.httpClient.get<Activity[]>(url, options);
   }
 
+  getTeamActivities(TeamId: number): Observable<Activity[]> {
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+    };
+    const url = this.activitiesUrl + '/teams?teamId=' + TeamId;
+    return this.httpClient.get<Activity[]>(url, options);
+  }
+
   deleteActivity(activity: Activity): void {
     const options = {
       headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))

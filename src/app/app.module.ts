@@ -16,6 +16,9 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamCreateComponent } from './team/team-create/team-create.component';
+import { TeamAgendaComponent } from './team/team-agenda/team-agenda.component';
+import { TeamActivityListComponent } from './team/team-agenda/team-activity-list/team-activity-list.component';
+import { TeamActivityAddComponent } from './team/team-agenda/team-activity-add/team-activity-add.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { TeamCreateComponent } from './team/team-create/team-create.component';
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
-    TeamCreateComponent
+    TeamCreateComponent,
+    TeamAgendaComponent,
+    TeamActivityListComponent,
+    TeamActivityAddComponent
   ],
     imports: [
         BrowserModule,

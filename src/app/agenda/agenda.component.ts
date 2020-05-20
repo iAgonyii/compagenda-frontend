@@ -23,9 +23,4 @@ export class AgendaComponent implements OnInit {
   openAddModal() {
     const modalRef = this.modalService.open(ActivityAddComponent);
   }
-
-  logout() {
-    localStorage.clear();
-    this.loggedIn = false;
-  }
 }

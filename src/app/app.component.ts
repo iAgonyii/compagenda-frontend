@@ -29,8 +29,11 @@ export class AppComponent implements OnInit {
     authService.getUsername.subscribe(username => this.username = username);
 
     teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
-      this.team = team;
-      console.log(this.team);
+      if (team) {
+        this.team = team;
+        localStorage.setItem('TeamId', this.team.id.toString());
+        console.log(this.team);
+      }
     });
   }
 
@@ -52,6 +55,7 @@ export class AppComponent implements OnInit {
   deleteTeam() {
     if (confirm('Are you sure to delete your team: ' + this.team.name)) {
       this.teamService.deleteTeam(this.team.id);
+      localStorage.removeItem('TeamId');
       window.location.reload();
     }
   }

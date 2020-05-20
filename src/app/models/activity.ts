@@ -4,4 +4,5 @@ export class Activity {
   starttime: Date;
   endtime: Date;
   userId: number;
+  teamId?: number;
 }

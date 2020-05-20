@@ -7,12 +7,15 @@ import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './services/authGuard';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {TeamAgendaComponent} from './team/team-agenda/team-agenda.component';
+import {TeamGuard} from './services/teamGuard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'  },
   { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'agenda', component: AgendaComponent, canActivate: [AuthGuard] },
+  { path: 'team/agenda', component: TeamAgendaComponent, canActivate: [AuthGuard, TeamGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent }
 ];
