@@ -65,7 +65,7 @@ export class AuthService {
         console.log('Succesfully logged in and authorized');
       },
 
-      (response: HttpResponse<401>) => {
+      (response: HttpResponse<403>) => {
         console.log('403 - Incorrect credentials');
         this.loginError.emit(true);
       });
@@ -90,6 +90,7 @@ export class AuthService {
           return true;
         },
       (errorResponse: HttpResponse<409>) => {
+        // To do: error message for conflicts.
           console.log('409 - Already exists');
           return false;
     });

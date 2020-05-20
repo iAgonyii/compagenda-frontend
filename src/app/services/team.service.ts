@@ -28,12 +28,12 @@ export class TeamService {
 
     // @ts-ignore
     this.httpClient.post(this.teamUrl, body.toString(), options).subscribe(
-      (response: HttpResponse<200>) => {
-        console.log('200 - Okay');
-        console.log(response);
+      (response: HttpResponse<201>) => {
+        console.log('201 - Created');
         window.location.reload();
       },
       (response: HttpResponse<409>) => {
+        // To do: error message when 409
         console.log('409 - Already exists');
       });
   }
