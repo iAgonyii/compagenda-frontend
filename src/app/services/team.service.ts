@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common
 import {Activity} from '../models/activity';
 import {Team} from '../models/team';
 import {observable, Observable} from 'rxjs';
+import {Invite} from '../models/invite';
 
 @Injectable({
   providedIn: 'root'
@@ -84,5 +85,14 @@ export class TeamService {
         // To do: error message when 404
         console.log('404 - User not found');
       });
+  }
+
+  getTeamInvites(userId: number): Observable<Invite[]> {
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+    };
+
+    const url = this.teamUrl + '/invite?userId=' + userId;
+    return this.httpClient.get<Invite[]>(url, options);
   }
 }

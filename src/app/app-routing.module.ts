@@ -10,12 +10,14 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {TeamAgendaComponent} from './team/team-agenda/team-agenda.component';
 import {TeamGuard} from './services/teamGuard';
 import {TeamComponent} from './team/team.component';
+import {TeamInvitesComponent} from './team/team-invites/team-invites.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'  },
   { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'agenda', component: AgendaComponent, canActivate: [AuthGuard] },
+  { path: 'invites', component: TeamInvitesComponent, canActivate: [AuthGuard] },
   { path: 'team/agenda', component: TeamAgendaComponent, canActivate: [AuthGuard, TeamGuard] },
   { path: 'team', component: TeamComponent, canActivate: [AuthGuard, TeamGuard] },
   { path: 'register', component: RegisterComponent },
