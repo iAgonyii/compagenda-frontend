@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Invite} from '../../models/invite';
+import {Component, OnInit} from '@angular/core';
+import {Invite, InviteStatusEnum} from '../../models/invite';
 import {TeamService} from '../../services/team.service';
 
 @Component({
@@ -19,6 +19,14 @@ export class TeamInvitesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  accept() {
+
+  }
+
+  reject() {
+
   }
 
 }

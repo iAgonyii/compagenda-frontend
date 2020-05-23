@@ -5,7 +5,7 @@ export class Invite {
   status: InviteStatusEnum;
 }
 
-enum InviteStatusEnum {
+export enum InviteStatusEnum {
   Pending,
   Accepted,
   Rejected
