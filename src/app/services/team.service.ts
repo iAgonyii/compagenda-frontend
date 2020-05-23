@@ -12,7 +12,7 @@ export class TeamService {
 
   private teamUrl: string;
   @Output() getTeam: EventEmitter<any> = new EventEmitter();
-  team: Team;
+  team: Observable<Team>;
 
   constructor(private httpClient: HttpClient) {
     this.teamUrl = 'http://localhost:8080/team';
@@ -41,17 +41,13 @@ export class TeamService {
       });
   }
 
-  getTeamOfUser(userId: number): Observable<Team> {
+  getTeamOfUser(userId: number): void {
     const options = {
       headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
     };
 
     const url = this.teamUrl + '?userId=' + userId;
-    let obTeam = this.httpClient.get<Team>(url, options);
-    obTeam.subscribe(team => {
-      this.team = team;
-    });
-    return obTeam;
+    this.team = this.httpClient.get<Team>(url, options);
   }
 
   deleteTeam(teamId: number): void {

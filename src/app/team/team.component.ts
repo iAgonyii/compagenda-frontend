@@ -14,8 +14,9 @@ export class TeamComponent implements OnInit {
   username: string;
 
   constructor(private activatedRoute: ActivatedRoute, private teamService: TeamService) {
-    this.team = this.teamService.team;
-    console.log(this.team);
+    this.teamService.team.subscribe(team => {
+      this.team = team;
+    });
   }
 
   ngOnInit(): void {

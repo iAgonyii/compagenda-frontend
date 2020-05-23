@@ -28,14 +28,19 @@ export class AppComponent implements OnInit {
     authService.getLoggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
     authService.getUsername.subscribe(username => this.username = username);
 
-    teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
-      if (team) {
-        this.team = team;
-        this.teamService.team = team;
-        localStorage.setItem('TeamId', this.team.id.toString());
-        console.log(this.team);
-      }
+    this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
+    this.teamService.team.subscribe(team => {
+      this.team = team;
     });
+
+    // teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
+    //   if (team) {
+    //     this.team = team;
+    //     this.teamService.team = team;
+    //     localStorage.setItem('TeamId', this.team.id.toString());
+    //     console.log(this.team);
+    //   }
+    // });
   }
 
   ngOnInit(): void {
