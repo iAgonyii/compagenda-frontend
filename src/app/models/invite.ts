@@ -1,6 +1,6 @@
 export class Invite {
   id: number;
-  teamId: number;
+  teamName: string;
   userId: number;
   status: InviteStatusEnum;
 }

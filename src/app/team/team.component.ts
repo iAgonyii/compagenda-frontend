@@ -23,7 +23,7 @@ export class TeamComponent implements OnInit {
   }
 
   inviteUser() {
-    this.teamService.teamInviteUser(this.team.id, this.username);
+    this.teamService.teamInviteUser(this.team.name, this.username);
   }
 
   isDisabled(): boolean {

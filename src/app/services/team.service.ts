@@ -64,9 +64,9 @@ export class TeamService {
     this.httpClient.post(url, teamId, options).subscribe();
   }
 
-  teamInviteUser(teamId: number, username: string) {
+  teamInviteUser(teamName: string, username: string) {
     const body = new URLSearchParams();
-    body.set('teamId', teamId.toString());
+    body.set('teamName', teamName);
     body.set('username', username);
 
     const options = {
