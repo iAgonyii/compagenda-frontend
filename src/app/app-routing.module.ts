@@ -9,6 +9,7 @@ import {AuthGuard} from './services/authGuard';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {TeamAgendaComponent} from './team/team-agenda/team-agenda.component';
 import {TeamGuard} from './services/teamGuard';
+import {TeamComponent} from './team/team.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'agenda', component: AgendaComponent, canActivate: [AuthGuard] },
   { path: 'team/agenda', component: TeamAgendaComponent, canActivate: [AuthGuard, TeamGuard] },
+  { path: 'team', component: TeamComponent, canActivate: [AuthGuard, TeamGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent }
 ];

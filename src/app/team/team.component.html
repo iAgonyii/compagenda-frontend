@@ -1,0 +1,40 @@
+
+<div class="jumbotron">
+  <h1 class="display-2">{{team.name}}</h1>
+  <p class="lead">On this page you can view information about your team, invite new members and kick members.</p>
+  <hr class="my-4">
+  <h3>Team members</h3>
+
+  <div class="row">
+    <div class="col-md-3" *ngFor="let member of team.teamMembers">
+      <div class="card mb-4 shadow-sm">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="assets/member.png" class="card-img" alt="User picture">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">{{member.username}}</h2>
+            </div>
+            <div class="card-footer">
+              &nbsp;
+              <a class="btn btn-danger btn-sm" style="float:right" routerLink="" role="button">Kick member</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <h3 style="float:left">Invite new members</h3><br><br>
+  <form class="form-inline">
+    <div class="form-group">
+      <input type="text" class="form-control" id="inputUsername" placeholder="Enter username...">
+    </div>&nbsp; &nbsp;
+    <button type="submit" class="btn btn-success">Send invite</button>
+  </form>
+
+
+
+</div>

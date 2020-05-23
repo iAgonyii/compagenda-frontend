@@ -19,6 +19,7 @@ import { TeamCreateComponent } from './team/team-create/team-create.component';
 import { TeamAgendaComponent } from './team/team-agenda/team-agenda.component';
 import { TeamActivityListComponent } from './team/team-agenda/team-activity-list/team-activity-list.component';
 import { TeamActivityAddComponent } from './team/team-agenda/team-activity-add/team-activity-add.component';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TeamActivityAddComponent } from './team/team-agenda/team-activity-add/t
     TeamCreateComponent,
     TeamAgendaComponent,
     TeamActivityListComponent,
-    TeamActivityAddComponent
+    TeamActivityAddComponent,
+    TeamComponent
   ],
     imports: [
         BrowserModule,

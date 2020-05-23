@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
     teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
       if (team) {
         this.team = team;
+        this.teamService.team = team;
         localStorage.setItem('TeamId', this.team.id.toString());
         console.log(this.team);
       }

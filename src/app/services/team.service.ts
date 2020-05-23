@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Activity} from '../models/activity';
 import {Team} from '../models/team';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,8 @@ import {Observable} from 'rxjs';
 export class TeamService {
 
   private teamUrl: string;
+  @Output() getTeam: EventEmitter<any> = new EventEmitter();
+  team: Team;
 
   constructor(private httpClient: HttpClient) {
     this.teamUrl = 'http://localhost:8080/team';
@@ -44,7 +46,11 @@ export class TeamService {
     };
 
     const url = this.teamUrl + '?userId=' + userId;
-    return this.httpClient.get<Team>(url, options);
+    let obTeam = this.httpClient.get<Team>(url, options);
+    obTeam.subscribe(team => {
+      this.team = team;
+    });
+    return obTeam;
   }
 
   deleteTeam(teamId: number): void {
