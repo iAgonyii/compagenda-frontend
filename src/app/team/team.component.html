@@ -30,9 +30,9 @@
   <h3 style="float:left">Invite new members</h3><br><br>
   <form class="form-inline">
     <div class="form-group">
-      <input type="text" class="form-control" id="inputUsername" placeholder="Enter username...">
+      <input [(ngModel)]="username" name="username" type="text" class="form-control" id="inputUsername" placeholder="Enter username...">
     </div>&nbsp; &nbsp;
-    <button type="submit" class="btn btn-success">Send invite</button>
+    <button [disabled]="isDisabled()" type="submit" class="btn btn-success" (click)="inviteUser()">Send invite</button>
   </form>
 
 

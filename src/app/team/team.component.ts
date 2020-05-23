@@ -11,6 +11,7 @@ import {TeamService} from '../services/team.service';
 export class TeamComponent implements OnInit {
 
   team: Team;
+  username: string;
 
   constructor(private activatedRoute: ActivatedRoute, private teamService: TeamService) {
     this.team = this.teamService.team;
@@ -19,6 +20,14 @@ export class TeamComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  inviteUser() {
+    this.teamService.teamInviteUser(this.team.id, this.username);
+  }
+
+  isDisabled(): boolean {
+    return !this.username;
   }
 
 }

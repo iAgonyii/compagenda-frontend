@@ -62,4 +62,27 @@ export class TeamService {
     const url = this.teamUrl + '/delete';
     this.httpClient.post(url, teamId, options).subscribe();
   }
+
+  teamInviteUser(teamId: number, username: string) {
+    const body = new URLSearchParams();
+    body.set('teamId', teamId.toString());
+    body.set('username', username);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                .set('Authorization', localStorage.getItem('Token')),
+      observe: 'response'
+    };
+
+    // @ts-ignore
+    this.httpClient.post(this.teamUrl + '/invite', body.toString(), options).subscribe(
+      (response: HttpResponse<200>) => {
+        console.log('201 - Invited');
+        // window.location.reload();
+      },
+      (response: HttpResponse<404>) => {
+        // To do: error message when 404
+        console.log('404 - User not found');
+      });
+  }
 }
