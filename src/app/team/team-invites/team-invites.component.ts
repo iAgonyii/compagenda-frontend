@@ -13,6 +13,7 @@ export class TeamInvitesComponent implements OnInit {
 
   constructor(private teamService: TeamService) {
     this.teamService.getTeamInvites(+localStorage.getItem('UserId')).subscribe(invites => {
+      invites.reverse();
       this.teamInvites = invites;
       console.log(this.teamInvites);
     });
