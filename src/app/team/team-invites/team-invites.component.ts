@@ -25,11 +25,20 @@ export class TeamInvitesComponent implements OnInit {
     if (confirm('Confirm to accept the invitation and join team ' + invite.teamName)) {
       invite.status = InviteStatusEnum.Accepted;
       this.teamService.acceptInviteJoinTeam(invite);
+      window.location.reload();
     }
   }
 
-  reject() {
+  reject(invite: Invite) {
+    if (confirm('Confirm to reject the invitation from team ' + invite.teamName)) {
+      invite.status = InviteStatusEnum.Rejected;
+      this.teamService.updateInviteStatus(invite);
+      window.location.reload();
+    }
+  }
 
+  hasTeam(): boolean {
+    return localStorage.getItem('TeamId') !== null;
   }
 
 }

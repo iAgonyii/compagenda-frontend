@@ -3,21 +3,32 @@
   <p class="lead">On this page you can receive invites from teams. You can either accept or reject them.</p>
   <hr class="my-4">
 
-  <div class="row">
+  <div *ngIf="!hasTeam()" class="row">
+    <p *ngIf="teamInvites.length === 0">You do not have any invites.</p>
     <div class="col-md-3" *ngFor="let invite of teamInvites">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
           <p>You received an invite to join team</p>
           <h2 class="card-title">{{invite.teamName}}</h2>
         </div>
-        <div class="card-footer">
-          <a class="btn btn-danger btn-sm text-white" (click)="reject()" role="button">Reject</a>
+        <div *ngIf="invite.status == 'Pending'" class="card-footer">
+          <a class="btn btn-danger btn-sm text-white" (click)="reject(invite)" role="button">Reject</a>
           &nbsp;&nbsp;
           <a class="btn btn-success btn-sm text-white" (click)="accept(invite)" role="button">Accept</a>
+        </div>
+        <div *ngIf="invite.status == 'Accepted'" class="card-footer">
+          <span class="text-success">You have accepted this invitation.</span>
+        </div>
+        <div *ngIf="invite.status == 'Rejected'" class="card-footer">
+          <span class="text-danger">You have rejected this invitation.</span>
         </div>
       </div>
     </div>
   </div>
+
+  <p *ngIf="hasTeam()">
+    You are already in a team. Leave your current team to view your invites.
+  </p>
 <br>
 <br>
 </div>

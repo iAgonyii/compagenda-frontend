@@ -116,4 +116,19 @@ export class TeamService {
 
     this.httpClient.post<Activity>(this.teamUrl +  '/invite/update', invite, options).subscribe();
   }
+
+  kickUserFromTeam(userId: number, teamId: number) {
+    const body = new URLSearchParams();
+    body.set('userId', userId.toString());
+    body.set('teamId', teamId.toString());
+
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Authorization', localStorage.getItem('Token')),
+      observe: 'response'
+    };
+
+    // @ts-ignore
+    this.httpClient.post(this.teamUrl + '/kick', body.toString(), options).subscribe();
+  }
 }
