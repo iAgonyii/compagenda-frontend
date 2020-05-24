@@ -9,6 +9,7 @@ import {TeamCreateComponent} from './team/team-create/team-create.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Team} from './models/team';
 import {TeamService} from './services/team.service';
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,10 +24,12 @@ export class AppComponent implements OnInit {
   team: Team;
 
   constructor(private authService: AuthService, private authGuard: AuthGuard, private modalService: NgbModal,
-              private teamService: TeamService) {
+              private teamService: TeamService, private router: Router) {
 
     authService.getLoggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
     authService.getUsername.subscribe(username => this.username = username);
+
+    // For after logins
     authService.userIdSet.subscribe(res => {
       if (res === true) {
         this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
@@ -37,6 +40,7 @@ export class AppComponent implements OnInit {
       }
     });
 
+    // For refreshes or when session is already active
     if (localStorage.getItem('UserId') !== '') {
       this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
       this.teamService.team.subscribe(team => {
@@ -44,15 +48,6 @@ export class AppComponent implements OnInit {
         localStorage.setItem('TeamId', team.id.toString());
       });
     }
-
-    // teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
-    //   if (team) {
-    //     this.team = team;
-    //     this.teamService.team = team;
-    //     localStorage.setItem('TeamId', this.team.id.toString());
-    //     console.log(this.team);
-    //   }
-    // });
   }
 
   ngOnInit(): void {
@@ -73,6 +68,15 @@ export class AppComponent implements OnInit {
   deleteTeam() {
     if (confirm('Are you sure to delete your team: ' + this.team.name)) {
       this.teamService.deleteTeam(this.team.id);
+      localStorage.removeItem('TeamId');
+      window.location.reload();
+    }
+  }
+
+  leaveTeam() {
+    if (confirm('Are you sure you want to leave team ' + this.team.name)) {
+      // We can recycle this method because it does the same thing.
+      this.teamService.kickUserFromTeam(+localStorage.getItem('UserId'), this.team.id);
       localStorage.removeItem('TeamId');
       window.location.reload();
     }
