@@ -23,6 +23,7 @@ export class AuthService {
   @Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
   @Output() getUsername: EventEmitter<any> = new EventEmitter();
   @Output() loginError: EventEmitter<any> = new EventEmitter();
+  @Output() userIdSet: EventEmitter<any> = new EventEmitter();
 
   login(username: string, password: string) {
     // const body = new URLSearchParams();
@@ -57,11 +58,13 @@ export class AuthService {
           if (res != null && isNumeric(res)) {
               localStorage.setItem('UserId', res.toString());
               console.log(localStorage.getItem('UserId'));
+              this.userIdSet.emit(true);
+              this.router.navigate(['/home']);
           }
         });
 
 
-        this.router.navigate(['/home']);
+
         console.log('Succesfully logged in and authorized');
       },
 

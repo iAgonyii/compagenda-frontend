@@ -27,11 +27,23 @@ export class AppComponent implements OnInit {
 
     authService.getLoggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
     authService.getUsername.subscribe(username => this.username = username);
-
-    this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
-    this.teamService.team.subscribe(team => {
-      this.team = team;
+    authService.userIdSet.subscribe(res => {
+      if (res === true) {
+        this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
+        this.teamService.team.subscribe(team => {
+          this.team = team;
+          localStorage.setItem('TeamId', team.id.toString());
+        });
+      }
     });
+
+    if (localStorage.getItem('UserId') !== '') {
+      this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
+      this.teamService.team.subscribe(team => {
+        this.team = team;
+        localStorage.setItem('TeamId', team.id.toString());
+      });
+    }
 
     // teamService.getTeamOfUser(+localStorage.getItem('UserId')).subscribe(team => {
     //   if (team) {
@@ -65,7 +77,6 @@ export class AppComponent implements OnInit {
       window.location.reload();
     }
   }
-
 
 
 }

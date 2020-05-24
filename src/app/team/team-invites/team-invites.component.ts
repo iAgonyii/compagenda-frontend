@@ -21,8 +21,11 @@ export class TeamInvitesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  accept() {
-
+  accept(invite: Invite) {
+    if (confirm('Confirm to accept the invitation and join team ' + invite.teamName)) {
+      invite.status = InviteStatusEnum.Accepted;
+      this.teamService.acceptInviteJoinTeam(invite);
+    }
   }
 
   reject() {

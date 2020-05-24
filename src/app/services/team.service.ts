@@ -91,4 +91,29 @@ export class TeamService {
     const url = this.teamUrl + '/invite?userId=' + userId;
     return this.httpClient.get<Invite[]>(url, options);
   }
+
+  acceptInviteJoinTeam(invite: Invite) {
+    this.updateInviteStatus(invite);
+
+    const body = new URLSearchParams();
+    body.set('teamName', invite.teamName);
+    body.set('userId', invite.userId.toString());
+
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Authorization', localStorage.getItem('Token')),
+      observe: 'response'
+    };
+
+    // @ts-ignore
+    this.httpClient.post(this.teamUrl + '/join', body.toString(), options).subscribe();
+  }
+
+  updateInviteStatus(invite: Invite) {
+    const options = {
+      headers: new HttpHeaders().set('Authorization', localStorage.getItem('Token'))
+    };
+
+    this.httpClient.post<Activity>(this.teamUrl +  '/invite/update', invite, options).subscribe();
+  }
 }
