@@ -1,0 +1,10 @@
+
+<ul class="list-group">
+  <p *ngIf="!authGuard.isLoggedIn()">Log in to see your activities</p>
+  <li class="list-group-item list-group-item-action" *ngFor="let activity of activities" (click)="openModal(activity)">
+    #{{activity.id}} <br>
+    <p>Category: {{activity.category}}</p>
+    <p>Start Time: {{activity.starttime | date:'dd-MM-yyyy hh:mm'}}</p>
+    <p>End Time: {{activity.endtime | date:'dd-MM-yyyy hh:mm'}}</p>
+  </li>
+</ul>

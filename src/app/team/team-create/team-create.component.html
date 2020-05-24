@@ -1,0 +1,27 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Create a new team</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="row form-group">
+
+    <div class="col-sm">
+      Team name: <br>
+    </div>
+
+    <div class="col-sm-9">
+      <input class="form-control" [(ngModel)]="team.name">
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Cancel</button>
+  <button type="button" class="btn btn-outline-dark" (click)="createTeam()">Create team</button>
+</div>
