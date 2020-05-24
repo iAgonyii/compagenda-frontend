@@ -42,4 +42,12 @@ export class TeamComponent implements OnInit {
       this.team.teamMembers.splice(index, 1);
     }
   }
+
+  isMe(member: any): boolean {
+    if (member.id === +localStorage.getItem('UserId')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

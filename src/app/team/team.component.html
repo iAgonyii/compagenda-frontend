@@ -16,9 +16,13 @@
             <div class="card-body">
               <h2 class="card-title">{{member.username}}</h2>
             </div>
-            <div class="card-footer">
+            <div *ngIf="!isMe(member)" class="card-footer">
               &nbsp;
               <a class="btn btn-danger btn-sm text-white" style="float:right" (click)="kick(member)" role="button">Kick member</a>
+            </div>
+            <div *ngIf="isMe(member)" class="card-footer">
+              &nbsp;
+              <a class="text-black font-weight-bold" style="float:right" role="button">(You)</a>
             </div>
           </div>
         </div>
