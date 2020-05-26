@@ -6,15 +6,15 @@
       "jest",
       "node"
     ],
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "allowJs": true
   },
   "files": [
-    "src/test.ts",
     "src/polyfills.ts"
   ],
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
   ]
-
 }

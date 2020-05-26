@@ -13,10 +13,18 @@ export class TeamComponent implements OnInit {
 
   team: Team;
   username: string;
+  isAdmin: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private teamService: TeamService) {
     this.teamService.team.subscribe(team => {
       this.team = team;
+      if (this.team.teamMembers[0].id === +localStorage.getItem('UserId')) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+      console.log(team);
     });
   }
 

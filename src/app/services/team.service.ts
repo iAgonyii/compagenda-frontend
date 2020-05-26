@@ -2,8 +2,9 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Activity} from '../models/activity';
 import {Team} from '../models/team';
-import {observable, Observable} from 'rxjs';
+import {observable, Observable, of} from 'rxjs';
 import {Invite} from '../models/invite';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,10 @@ export class TeamService {
 
   private teamUrl: string;
   @Output() getTeam: EventEmitter<any> = new EventEmitter();
+  @Output() teamIdSet: EventEmitter<any> = new EventEmitter();
   team: Observable<Team>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
     this.teamUrl = 'http://localhost:8080/team';
   }
 
@@ -106,7 +108,9 @@ export class TeamService {
     };
 
     // @ts-ignore
-    this.httpClient.post(this.teamUrl + '/join', body.toString(), options).subscribe();
+    this.httpClient.post(this.teamUrl + '/join', body.toString(), options).subscribe(res => {
+      window.location.reload();
+    });
   }
 
   updateInviteStatus(invite: Invite) {
@@ -130,5 +134,10 @@ export class TeamService {
 
     // @ts-ignore
     this.httpClient.post(this.teamUrl + '/kick', body.toString(), options).subscribe();
+  }
+
+  setTeamIdLocal(id: string) {
+    localStorage.setItem('TeamId', id);
+    this.teamIdSet.emit(true);
   }
 }

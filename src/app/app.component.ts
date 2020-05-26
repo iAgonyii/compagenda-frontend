@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   title = 'compagendafront';
   loggedIn: boolean;
   username: string;
+  isAdmin: boolean;
 
   team: Team;
 
@@ -35,17 +36,30 @@ export class AppComponent implements OnInit {
         this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
         this.teamService.team.subscribe(team => {
           this.team = team;
-          localStorage.setItem('TeamId', team.id.toString());
+          if (this.team.teamMembers[0].id === +localStorage.getItem('UserId')) {
+            this.isAdmin = true;
+          } else {
+            this.isAdmin = false;
+          }
+          this.teamService.setTeamIdLocal(team.id.toString());
+          console.log('set team id');
+          // localStorage.setItem('TeamId', team.id.toString());
         });
       }
     });
 
     // For refreshes or when session is already active
-    if (localStorage.getItem('UserId') !== '') {
+    if (+localStorage.getItem('UserId') > 0) {
       this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
       this.teamService.team.subscribe(team => {
         this.team = team;
-        localStorage.setItem('TeamId', team.id.toString());
+        if (this.team.teamMembers[0].id === +localStorage.getItem('UserId')) {
+          this.isAdmin = true;
+        } else {
+          this.isAdmin = false;
+        }
+        this.teamService.setTeamIdLocal(team.id.toString());
+        // localStorage.setItem('TeamId', team.id.toString());
       });
     }
   }
