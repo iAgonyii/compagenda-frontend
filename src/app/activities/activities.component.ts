@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Activity} from '../models/activity';
 import {ActivityService} from '../services/activity.service';
+import {Note} from '../models/note';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-activities',
@@ -11,10 +13,21 @@ import {ActivityService} from '../services/activity.service';
 export class ActivitiesComponent implements OnInit {
 
   activity: any = {};
+  newNote: any = {};
 
-  constructor(public activeModal: NgbActiveModal, private activityService: ActivityService) { }
+
+  constructor(public activeModal: NgbActiveModal, private activityService: ActivityService) {  }
 
   ngOnInit(): void {
+
+  }
+
+  addNote() {
+    this.newNote.postedBy = localStorage.getItem('Username');
+    this.newNote.postedAt = new Date();
+    this.activity.notes.unshift(this.newNote);
+    console.log(this.activity);
+    this.activityService.editActivity(this.activity);
   }
 
   saveChanges() {

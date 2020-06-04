@@ -4,6 +4,7 @@ import {ActivityService} from '../../../services/activity.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthGuard} from '../../../services/authGuard';
 import {ActivitiesComponent} from '../../../activities/activities.component';
+import {Note} from '../../../models/note';
 
 @Component({
   selector: 'app-team-activity-list',
@@ -20,6 +21,12 @@ export class TeamActivityListComponent implements OnInit {
   ngOnInit(): void {
     this.activityService.getTeamActivities(+localStorage.getItem('TeamId')).subscribe(res => {
       console.log(res);
+      let teamNotes: any[] = [];
+      res.forEach(activity => {
+        teamNotes.push(activity.notes);
+      });
+      console.log(teamNotes);
+      this.activityService.teamNotes = teamNotes[0].reverse();
       this.activities = res;
     });
   }

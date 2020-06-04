@@ -46,5 +46,24 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-danger" (click)="deleteActivity()">Delete</button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Cancel</button>
-    <button type="button" class="btn btn-outline-dark" (click)="saveChanges()">Save Activity</button>
+    <button type="button" class="btn btn-outline-dark" (click)="saveChanges()">Save Activity</button><br>
+  <hr width="100%" style="background-color: black">
+  <div class="modal-body">
+    <h4 style="float:left">Notes</h4><br><br>
+    <div>
+      <label>Add new note</label>
+      <textarea class="form-control" [(ngModel)]="newNote.message"></textarea>
+      <a class="btn-sm btn-primary text-white" style="float:right" (click)="addNote()">Add note</a> <br>
+      <hr width="100%" style="background-color: lightgrey"><br>
+    </div>
+    <div *ngIf="activity.notes.length > 0" class="overflow-auto" style="height: 17rem">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let note of activity.notes">
+          Posted by: <span class="font-weight-bold">{{ note.postedBy }}</span> at <span class="font-weight-bold">{{ note.postedAt | date:'dd-MM-yyyy hh:mm' : 'local' }}</span> <br>
+          "{{ note.message }}"
+        </li>
+      </ul>
+    </div>
+    <p *ngIf="activity.notes.length < 1">No notes yet!</p>
+  </div>
 </div>

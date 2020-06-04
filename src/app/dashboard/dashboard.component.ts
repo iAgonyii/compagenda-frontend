@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TeamService} from '../services/team.service';
+import {ActivityService} from '../services/activity.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
   hasTeam: boolean;
 
 
-  constructor(private teamService: TeamService) {
+  constructor(private teamService: TeamService, public activityService: ActivityService) {
     if (+localStorage.getItem('TeamId') > 0) {
       this.hasTeam = true;
     }
