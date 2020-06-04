@@ -6,7 +6,7 @@
   <h3>Team members</h3>
 
   <div class="row">
-    <div class="col-md-3" *ngFor="let member of team.teamMembers">
+    <div class="col-md-3" *ngFor="let member of team.teamMembers; let i = index">
       <div class="card mb-4 shadow-sm">
         <div class="row no-gutters">
           <div class="col-md-4">
@@ -14,11 +14,13 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h2 class="card-title">{{member.username}}</h2>
+              <h2 class="card-title" *ngIf="i === 0">👑 {{member.username}}</h2>
+              <h2 *ngIf="i !== 0" class="card-title">{{member.username}}</h2>
             </div>
             <div *ngIf="!isMe(member)" class="card-footer">
               &nbsp;
-              <a class="btn btn-danger btn-sm text-white" style="float:right" (click)="kick(member)" role="button">Kick member</a>
+              <a class="btn btn-danger btn-sm text-white" style="float:right" *ngIf="isAdmin" (click)="kick(member)" role="button">Kick member</a>
+              <button type="button" class="btn btn-danger btn-sm text-white disabled" style="float:right" placement="bottom" ngbTooltip="Only team admins can kick members" *ngIf="!isAdmin">Kick member</button>
             </div>
             <div *ngIf="isMe(member)" class="card-footer">
               &nbsp;
@@ -34,9 +36,11 @@
   <h3 style="float:left">Invite new members</h3><br><br>
   <form class="form-inline">
     <div class="form-group">
-      <input [(ngModel)]="username" name="username" type="text" class="form-control" id="inputUsername" placeholder="Enter username...">
+      <input *ngIf="isAdmin" [(ngModel)]="username" name="username" type="text" class="form-control" id="inputUsername" placeholder="Enter username...">
+      <input *ngIf="!isAdmin" name="username" type="text" class="form-control" placeholder="Enter username..." disabled>
     </div>&nbsp; &nbsp;
-    <button [disabled]="isDisabled()" type="submit" class="btn btn-success" (click)="inviteUser()">Send invite</button>
+    <button *ngIf="isAdmin" [disabled]="isDisabled()" type="submit" class="btn btn-success" (click)="inviteUser()">Send invite</button>
+    <button *ngIf="!isAdmin" type="submit" class="btn btn-success disabled" placement="bottom" ngbTooltip="Only team admins can invite new members">Send invite</button>
   </form>
 
 

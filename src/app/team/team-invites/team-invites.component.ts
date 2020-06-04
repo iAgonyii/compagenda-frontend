@@ -26,7 +26,6 @@ export class TeamInvitesComponent implements OnInit {
     if (confirm('Confirm to accept the invitation and join team ' + invite.teamName)) {
       invite.status = InviteStatusEnum.Accepted;
       this.teamService.acceptInviteJoinTeam(invite);
-      window.location.reload();
     }
   }
 

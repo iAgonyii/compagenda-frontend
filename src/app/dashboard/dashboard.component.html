@@ -1,1 +1,67 @@
-<p>dashboard works!</p>
+<h1>Dashboard</h1>
+<div *ngIf="hasTeam">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6 overflow-auto" style="height: 395px; border-right: 2px grey solid">
+        <h3>Personal notes</h3>
+        <div *ngIf="this.activityService.personalNotes.length > 0" class="overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let note of this.activityService.personalNotes">
+              Posted by: <span class="font-weight-bold">{{ note.postedBy }}</span> at <span class="font-weight-bold">{{ note.postedAt | date:'dd-MM-yyyy hh:mm' : 'local' }}</span> <br>
+              "{{ note.message }}"
+            </li>
+          </ul>
+        </div>
+        <p *ngIf="this.activityService.personalNotes.length < 1">No notes yet!</p>
+      </div>
+      <div class="col-6 overflow-auto" style="height: 395px">
+        <app-agenda></app-agenda>
+      </div>
+    </div>
+  </div>
+  <hr class="bg-dark" style="height: 3px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6 overflow-auto" style="height: 395px; border-right: 2px grey solid">
+        <h3>Team notes</h3>
+        <div *ngIf="this.activityService.teamNotes.length > 0" class="overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let note of this.activityService.teamNotes">
+              Posted by: <span class="font-weight-bold">{{ note.postedBy }}</span> at <span class="font-weight-bold">{{ note.postedAt | date:'dd-MM-yyyy hh:mm' : 'local' }}</span> <br>
+              "{{ note.message }}"
+            </li>
+          </ul>
+        </div>
+        <p *ngIf="this.activityService.teamNotes.length < 1">No notes yet!</p>
+      </div>
+      <div class="col-6 overflow-auto" style="height: 395px">
+        <app-team-agenda></app-team-agenda>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!hasTeam">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6 overflow-auto" style="height: 829px; border-right: 2px grey solid">
+        <h3>Personal notes</h3>
+        <div *ngIf="this.activityService.personalNotes.length > 0" class="overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let note of this.activityService.personalNotes">
+              Posted by: <span class="font-weight-bold">{{ note.postedBy }}</span> at <span class="font-weight-bold">{{ note.postedAt | date:'dd-MM-yyyy hh:mm' : 'local' }}</span> <br>
+              "{{ note.message }}"
+            </li>
+          </ul>
+        </div>
+        <p *ngIf="this.activityService.personalNotes.length < 1">No notes yet!</p>
+      </div>
+      <div class="col-6 overflow-auto" style="height: 829px">
+        <app-agenda></app-agenda>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

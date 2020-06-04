@@ -1,3 +1,5 @@
+import {Note} from './note';
+
 export class Activity {
   id: number;
   category: string;
@@ -5,4 +7,5 @@ export class Activity {
   endtime: Date;
   userId: number;
   teamId?: number;
+  notes: Note[];
 }

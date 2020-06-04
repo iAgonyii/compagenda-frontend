@@ -20,6 +20,11 @@ export class ActivityListComponent implements OnInit {
     if (this.authGuard.isLoggedIn()) {
       this.activityService.getActivities(+localStorage.getItem('UserId')).subscribe(res => {
         console.log(res);
+        let personalNotes: any[] = [];
+        res.forEach(activity => {
+          personalNotes.push(activity.notes);
+        });
+        this.activityService.personalNotes = personalNotes[0].reverse();
         this.activities = res;
       });
     }

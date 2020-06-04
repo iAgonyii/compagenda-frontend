@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Activity} from '../models/activity';
 import {ObjectUnsubscribedError, Observable} from 'rxjs';
+import {Note} from '../models/note';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,9 @@ import {ObjectUnsubscribedError, Observable} from 'rxjs';
 export class ActivityService {
 
   private activitiesUrl: string;
+
+  teamNotes: Note[] = [];
+  personalNotes: Note[] = [];
 
   constructor(private httpClient: HttpClient) {
     this.activitiesUrl = 'http://localhost:8080/activity';
