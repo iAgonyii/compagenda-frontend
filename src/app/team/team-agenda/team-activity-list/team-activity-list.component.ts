@@ -26,7 +26,9 @@ export class TeamActivityListComponent implements OnInit {
         teamNotes.push(activity.notes);
       });
       console.log(teamNotes);
-      this.activityService.teamNotes = teamNotes[0].reverse();
+      if (teamNotes.length > 0) {
+        this.activityService.teamNotes = teamNotes[0].reverse();
+      }
       this.activities = res;
     });
   }

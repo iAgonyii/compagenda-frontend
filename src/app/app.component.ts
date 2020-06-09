@@ -53,13 +53,15 @@ export class AppComponent implements OnInit {
       this.teamService.getTeamOfUser(+localStorage.getItem('UserId'));
       this.teamService.team.subscribe(team => {
         this.team = team;
-        if (this.team.teamMembers[0].id === +localStorage.getItem('UserId')) {
-          this.isAdmin = true;
-        } else {
-          this.isAdmin = false;
+        if (this.team) {
+          if (this.team.teamMembers[0].id === +localStorage.getItem('UserId')) {
+            this.isAdmin = true;
+          } else {
+            this.isAdmin = false;
+          }
+          this.teamService.setTeamIdLocal(team.id.toString());
+          // localStorage.setItem('TeamId', team.id.toString());
         }
-        this.teamService.setTeamIdLocal(team.id.toString());
-        // localStorage.setItem('TeamId', team.id.toString());
       });
     }
   }

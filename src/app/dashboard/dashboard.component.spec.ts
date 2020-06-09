@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import {AgendaComponent} from '../agenda/agenda.component';
+import {TeamAgendaComponent} from '../team/team-agenda/team-agenda.component';
+import {TeamActivityListComponent} from '../team/team-agenda/team-activity-list/team-activity-list.component';
+import {ActivityListComponent} from '../activities/activity-list/activity-list.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +14,8 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent, AgendaComponent, TeamAgendaComponent, TeamActivityListComponent, ActivityListComponent ],
+      imports: [ HttpClientTestingModule, RouterTestingModule ]
     })
     .compileComponents();
   }));

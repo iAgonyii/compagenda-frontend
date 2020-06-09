@@ -28,6 +28,7 @@ export class ActivitiesComponent implements OnInit {
     this.activity.notes.unshift(this.newNote);
     console.log(this.activity);
     this.activityService.editActivity(this.activity);
+    this.newNote = {};
   }
 
   saveChanges() {

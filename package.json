@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "~9.0.1",
     "@angular/router": "~9.0.1",
     "@auth0/angular-jwt": "^4.0.0",
-    "@briebug/jest-schematic": "^2.1.1",
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "@types/mocha": "^7.0.2",
     "bootstrap": "^4.4.1",
@@ -37,43 +36,13 @@
     "@angular/cli": "~9.0.2",
     "@angular/compiler-cli": "~9.0.1",
     "@angular/language-service": "~9.0.1",
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^25.2.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jest": "^26.0.1",
-    "jest-preset-angular": "^6.0.2",
+    "jest-preset-angular": "^8.2.0",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "@app/(.*)": "<rootDir>/src/app/$1",
-      "@assets/(.*)": "<rootDir>/src/assets/$1",
-      "@core/(.*)": "<rootDir>/src/app/core/$1",
-      "@env": "<rootDir>/src/environments/environment",
-      "@src/(.*)": "<rootDir>/src/src/$1",
-      "@state/(.*)": "<rootDir>/src/app/state/$1"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.spec.json",
-        "stringifyContentPathRegex": "\\.html$",
-        "astTransformers": [
-          "jest-preset-angular/build/InlineFilesTransformer",
-          "jest-preset-angular/build/StripStylesTransformer"
-        ]
-      }
-    },
-    "preset": "jest-preset-angular",
-    "roots": [
-      "src"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setup-jest.ts"
-    ],
-    "transform": {
-      "^.+\\.(ts|js|html)$": "ts-jest"
-    }
   }
 }
